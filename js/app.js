@@ -21,9 +21,17 @@ var MailModel = {
         this.messages.forEach(function(message){
             var spam = false;
             this.rules.forEach(function(rule){
-                if(message.indexOf(rule)>=0){
-                    spam=true;
+                if(rule.subject!=""){
+                    if(message.subject.indexOf(rule.subject)>=0){
+                        spam=true;
+                    }
                 }
+                if(rule.from!=""){
+                    if(message.from.indexOf(rule.from)>=0){
+                        spam=true;
+                    }
+                }
+
             });
             if(!spam)filteredMessages.push(message);
         });
@@ -57,7 +65,7 @@ var MailView = {
 
     addMail : function(mails){
         mails.forEach(function(mail){
-            $(MailView.resultUl).append(MailView.listTemplate.replace("ELEMENT", mail));
+            $(MailView.resultUl).append(MailView.listTemplate.replace("ELEMENT", "from:"+mail.from+"<br>subject:"+mail.subject+"<br><br>"));
         });
     },
 
