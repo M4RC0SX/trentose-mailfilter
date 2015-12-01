@@ -65,7 +65,7 @@ var MailView = {
 
     addMail : function(mails){
         mails.forEach(function(mail){
-            $(MailView.resultUl).append(MailView.listTemplate.replace("ELEMENT", "from:"+mail.from+"<br>subject:"+mail.subject+"<br><br>"));
+            $(MailView.resultUl).append(MailView.listTemplate.replace("ELEMENT",mail.from));
         });
     },
 
